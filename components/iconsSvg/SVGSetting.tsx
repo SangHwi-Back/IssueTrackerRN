@@ -5,7 +5,7 @@ const xml = `
         xmlns="http://www.w3.org/2000/svg"
         width='35'
         height='35'
-        viewBox='0 0 35 35'
+        viewBox='-5 -5 35 35'
         fill="none"
         stroke="currentColor"
         stroke-width="2"
@@ -18,5 +18,5 @@ const xml = `
 `;
 
 export default function SVGSetting() {
-  return <SvgXml xml={xml}/>;
+  return <SvgXml xml={xml} />;
 }

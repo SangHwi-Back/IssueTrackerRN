@@ -1,7 +1,8 @@
 import {ReactNode} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View, Text} from 'react-native';
-import Header from './Header.tsx';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import Header from './Header';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import ActionBar from './ActionBar';
 
 interface MainProps {
   children: ReactNode;
@@ -21,9 +22,7 @@ const Main = ({children, backgroundColor}: MainProps) => {
         style={styles.contentsContainer}>
         {children}
       </ScrollView>
-      <View style={styles.actionBarContainer}>
-        <Text>액션바입니다.</Text>
-      </View>
+      <ActionBar />
     </View>
   );
 };
@@ -36,14 +35,12 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     height: 50,
+    justifyContent: 'space-around',
+    alignItems: 'flex-end',
   },
   contentsContainer: {
     flex: 1,
     backgroundColor: 'green',
-  },
-  actionBarContainer: {
-    height: 50,
-    backgroundColor: 'blue',
   },
 });
 

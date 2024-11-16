@@ -1,6 +1,7 @@
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {FC, useEffect, useState} from 'react';
-import {SettingIcon, FilterIcon, GridIcon} from './iconsSvg/CommonIcons.tsx';
+import {SettingIcon, FilterIcon, GridIcon} from '../iconsSvg/CommonIcons.tsx';
+import styles from './style.ts';
 
 interface FilterState {
   isOn: boolean;
@@ -37,20 +38,11 @@ const Header: FC<HeaderProps> = ({grid, filter}: HeaderProps) => {
 
   return (
     <View style={styles.container}>
-      <FilterIcon onPress={_filterButtonTapped} />
-      <GridIcon onPress={_gridButtonTapped} />
-      <SettingIcon onPress={_settingButtonTapped} />
+      <FilterIcon onPress={_filterButtonTapped} style={styles.button} />
+      <GridIcon onPress={_gridButtonTapped} style={styles.button} />
+      <SettingIcon onPress={_settingButtonTapped} style={styles.button} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  button: {width: 35, height: 35, borderRadius: 5},
-});
 
 export default Header;
