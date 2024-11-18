@@ -1,5 +1,8 @@
 import {FC, useState} from 'react';
 import {Button, Modal, Pressable, Text, View} from 'react-native';
+import styles from './style.ts';
+import INPUTCheckBox from '../../Common/INPUTCheckBox';
+import INPUTRadioButton from '../../Common/INPUTRadioButton';
 
 type RadioSettingState = {isOn: boolean};
 type ParentSettingState = {childState: SettingRowState[]};
@@ -54,7 +57,7 @@ const SettingModal: FC<SettingModalProps> = (props: SettingModalProps) => {
       {
         key: '3',
         style: SettingStyle.parent,
-        name: 'Checkbox 스타일',
+        name: 'Navigation 스타일',
         state: {childState: []} as ParentSettingState,
       },
     ],
@@ -68,10 +71,6 @@ const SettingModal: FC<SettingModalProps> = (props: SettingModalProps) => {
       return newState;
     });
   };
-
-  // const _onPressSetting = () => {};
-
-  // const _onPressValueOfSetting = () => {};
 
   function getRows(): SettingRowState[] {
     if (state.currentKey) {
@@ -95,7 +94,7 @@ const SettingModal: FC<SettingModalProps> = (props: SettingModalProps) => {
 
       return currentState;
     } else {
-      return [];
+      return state.rowState;
     }
   }
 
@@ -107,16 +106,11 @@ const SettingModal: FC<SettingModalProps> = (props: SettingModalProps) => {
       onRequestClose={_onCloseButton}>
       <Pressable
         onPress={_onCloseButton}
-        style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+        style={styles.overlay}>
         <View
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            backgroundColor: '#fff',
-            position: 'absolute',
-          }}>
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <Text>설정</Text>
+          style={styles.container}>
+          <View style={styles.titleArea}>
+            <Text style={styles.title}>설정</Text>
             <Button title={'X'} onPress={_onCloseButton} />
           </View>
 
@@ -124,16 +118,16 @@ const SettingModal: FC<SettingModalProps> = (props: SettingModalProps) => {
             const valueArea = () => {
               switch (item.style) {
                 case SettingStyle.check:
-                  return <input type={'checkbox'} />;
+                  return <INPUTCheckBox name={item.key}/>;
                 case SettingStyle.parent:
-                  return <Text>{'>'}</Text>;
+                  return <Text style={{width: 30, height: 30, textAlign: 'center', alignSelf: 'center'}}>{'>'}</Text>;
                 case SettingStyle.radio:
-                  return <input type={'radio'} />;
+                  return <INPUTRadioButton name={item.key} onPressButton={() => {}}/>;
               }
             };
 
             return (
-              <View style={{flex: 1, flexDirection: 'row'}}>
+              <View key={item.key} style={styles.item}>
                 <Text>{item.name}</Text>
                 {valueArea()}
               </View>
