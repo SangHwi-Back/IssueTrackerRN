@@ -85,7 +85,7 @@ const FilterModal: FC<FilterModalProps> = (props: FilterModalProps) => {
   return (
     <Modal
       animationType={'slide'}
-      visible={props.visibility}
+      visible={props.visibility} // Props 는 Parent 로부터 내려오는 값. 모달은 Parent 의 상태에 따라 컨트롤 되는 것이 적절.
       transparent={true}
       onRequestClose={_onPressClose}>
       

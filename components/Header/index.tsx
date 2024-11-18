@@ -3,34 +3,35 @@ import {FC, useEffect, useState} from 'react';
 import {SettingIcon, FilterIcon, GridIcon} from '../iconsSvg/CommonIcons.tsx';
 import styles from './style.ts';
 import FilterModal from '../Modal/Filter';
+import GridModal from '../Modal/Grid/GridModal.tsx';
 
 interface FilterModalState {
   isOn: boolean;
 }
 
-interface GridState {
+interface GridModalState {
   isOn: boolean;
 }
 
 interface HeaderProps {
-  grid: GridState;
+  grid: GridModalState;
   filter: FilterModalState;
 }
 
 const Header: FC<HeaderProps> = ({grid, filter}: HeaderProps) => {
-  const [gridState, setGridState] = useState<GridState>(grid);
-  const [filterModalState, setFilterState] = useState<FilterModalState>(filter);
+  const [gridModalState, setGridModalState] = useState<GridModalState>(grid);
+  const [filterModalState, setFilterModalState] = useState<FilterModalState>(filter);
 
-  useEffect(() => {}, [gridState, filterModalState]);
+  useEffect(() => {}, [gridModalState, filterModalState]);
 
   const _gridButtonTapped = () => {
-    setGridState(prevState => {
+    setGridModalState(prevState => {
       return {isOn: !prevState.isOn};
     });
   };
 
   const _filterButtonTapped = () => {
-    setFilterState(prevState => {
+    setFilterModalState(prevState => {
       return {isOn: !prevState.isOn};
     });
   };
@@ -43,11 +44,18 @@ const Header: FC<HeaderProps> = ({grid, filter}: HeaderProps) => {
       <FilterModal
         filterOnChange={state => {
           const newState = {...filterModalState, isOn: !state.isShowing};
-          setFilterState(newState);
+          setFilterModalState(newState);
         }}
         visibility={filterModalState.isOn}
       />
       <GridIcon onPress={_gridButtonTapped} style={styles.button} />
+      <GridModal
+        gridOnChange={state => {
+          const newState = {...gridModalState, isOn: !state.isShowing};
+          setGridModalState(newState);
+        }}
+        visibility={gridModalState.isOn}
+      />
       <SettingIcon onPress={_settingButtonTapped} style={styles.button} />
     </View>
   );
