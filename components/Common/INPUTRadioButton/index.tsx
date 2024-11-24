@@ -30,8 +30,7 @@ const INPUTRadioButton: FC<INPUTRadioProps> = (props: INPUTRadioProps) => {
       <View
         style={[
           styles.thumbnail,
-          // eslint-disable-next-line react-native/no-inline-styles
-          {backgroundColor: props.isOn ? '#000' : 'none'},
+          (state.isOn ? styles.radioOn : styles.radioOff),
         ]}
       />
     </TouchableOpacity>

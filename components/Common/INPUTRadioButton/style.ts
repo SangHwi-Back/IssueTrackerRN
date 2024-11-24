@@ -16,6 +16,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#000',
   },
+  radioOn: {
+// {backgroundColor: props.isOn ? '#000' : 'none'}
+    backgroundColor: '#000',
+  },
+  radioOff: {
+    backgroundColor: 'none',
+  },
 });
 
 export default styles;
