@@ -14,7 +14,7 @@ const Main = ({children, backgroundColor}: MainProps) => {
     <View style={styles.container}>
       <SafeAreaView>
         <View style={[styles.headerContainer, backgroundColor]}>
-          <Header grid={{isOn: false}} filter={{isOn: false}} />
+          <Header grid={{isOn: false}} filter={{isOn: false}} setting={{isOn: false}} />
         </View>
       </SafeAreaView>
       <ScrollView

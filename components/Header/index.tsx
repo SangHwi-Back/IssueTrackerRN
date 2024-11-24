@@ -21,35 +21,31 @@ interface SettingModalState {
 interface HeaderProps {
   grid: GridModalState;
   filter: FilterModalState;
+  setting: SettingModalState;
 }
 
-const Header: FC<HeaderProps> = ({grid, filter}: HeaderProps) => {
+const Header: FC<HeaderProps> = ({grid, filter, setting}: HeaderProps) => {
   const [gridModalState, setGridModalState] = useState<GridModalState>(grid);
-  const [filterModalState, setFilterModalState] =
-    useState<FilterModalState>(filter);
-  const [settingModalState, setSettingModalState] = useState<SettingModalState>(
-    {
-      isOn: false,
-    },
-  );
+  const [filterModalState, setFilterModalState] = useState<FilterModalState>(filter);
+  const [settingModalState, setSettingModalState] = useState<SettingModalState>(setting);
 
   useEffect(() => {}, [gridModalState, filterModalState]);
 
   const _gridButtonTapped = () => {
     setGridModalState(prevState => {
-      return {isOn: !prevState.isOn};
+      return {...prevState, isOn: !prevState.isOn};
     });
   };
 
   const _filterButtonTapped = () => {
     setFilterModalState(prevState => {
-      return {isOn: !prevState.isOn};
+      return {...prevState, isOn: !prevState.isOn};
     });
   };
 
   const _settingButtonTapped = () => {
     setSettingModalState(prevState => {
-      return {isOn: !prevState.isOn};
+      return {...prevState, isOn: !prevState.isOn};
     });
   };
 
@@ -73,10 +69,7 @@ const Header: FC<HeaderProps> = ({grid, filter}: HeaderProps) => {
       />
       <SettingIcon onPress={_settingButtonTapped} style={styles.button} />
       <SettingModal
-        settingOnChange={state => {
-          const newState = {...settingModalState, isOn: !state.isShowing};
-          setSettingModalState(newState);
-        }}
+        settingOnChange={state => setSettingModalState({isOn: state.isShowing})}
         visibility={settingModalState.isOn}
       />
     </View>

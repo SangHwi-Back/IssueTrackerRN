@@ -37,6 +37,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  navigationText: {
+    width: 30,
+    height: 30,
+    textAlign: 'center',
+    alignSelf: 'center',
+  },
 });
 
 export default styles;

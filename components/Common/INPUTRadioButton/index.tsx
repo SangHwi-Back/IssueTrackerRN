@@ -4,15 +4,20 @@ import styles from './style.ts';
 
 interface INPUTRadioProps {
   name: string;
+  isOn: boolean;
   onPressButton: (state: INPUTRadioState) => void;
 }
 
-interface INPUTRadioState {
+export interface INPUTRadioState {
   isOn: boolean;
+  key: string;
 }
 
 const INPUTRadioButton: FC<INPUTRadioProps> = (props: INPUTRadioProps) => {
-  const [state, setState] = useState<INPUTRadioState>({isOn: false});
+  const [state, setState] = useState<INPUTRadioState>({
+    isOn: false,
+    key: props.name,
+  });
   return (
     <TouchableOpacity
       key={props.name}
@@ -25,7 +30,8 @@ const INPUTRadioButton: FC<INPUTRadioProps> = (props: INPUTRadioProps) => {
       <View
         style={[
           styles.thumbnail,
-          {backgroundColor: state.isOn ? '#000' : 'none'},
+          // eslint-disable-next-line react-native/no-inline-styles
+          {backgroundColor: props.isOn ? '#000' : 'none'},
         ]}
       />
     </TouchableOpacity>
